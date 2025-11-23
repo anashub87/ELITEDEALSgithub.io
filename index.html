@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELITE DEALS</title>
+
+<!-- خطوط -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Poppins', sans-serif; transition: background 0.5s, color 0.5s; overflow-x:hidden; }
+
+  body.light { background: linear-gradient(120deg,#a8edea,#fed6e3); color:#111; }
+  body.dark { background: linear-gradient(120deg,#1e3c72,#2a5298); color:#f0f0f0; }
+
+  #top-bar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:rgba(255,255,255,0.2); backdrop-filter: blur(10px); }
+  #top-bar span { margin-right:10px; }
+  #top-bar button { margin-left:5px; cursor:pointer; padding:5px 10px; border:none; border-radius:5px; transition: transform 0.1s; }
+  #top-bar button:active { transform:scale(0.95); }
+
+  #page-buttons button { margin-left:5px; }
+
+  #header { text-align:center; padding:50px 20px; background:rgba(255,255,255,0.1); backdrop-filter:blur(10px); }
+  #header h1 { font-family:'Cairo', sans-serif; font-size:3rem; }
+  #header p { font-size:1.5rem; margin-top:10px; }
+
+  #header .icons { margin-top:20px; }
+  #header .icons a { margin:0 10px; display:inline-block; transition: transform 0.2s; }
+  #header .icons a:active { transform:scale(0.9); }
+
+  .scroll-bar { width:100%; overflow:hidden; white-space:nowrap; padding:10px 0; margin:20px 0; }
+  .scroll-bar span { display:inline-block; padding:0 50px; font-weight:bold; animation: scroll 15s linear infinite; }
+  @keyframes scroll { 0%{ transform:translateX(100%); } 100%{ transform:translateX(-100%); } }
+
+  #pages { display:flex; transition: transform 0.5s; }
+  .page { min-width:100vw; padding:20px; background:rgba(255,255,255,0.1); backdrop-filter:blur(10px); }
+
+  h2 { margin-bottom:10px; }
+  ul { list-style:none; padding-left:0; }
+  li { margin-bottom:8px; }
+
+  #tips { margin-top:20px; }
+
+</style>
+</head>
+<body class="light">
+
+<div id="top-bar">
+  <div><span id="datetime"></span></div>
+  <div>
+    <button id="mode-btn">☀</button>
+    <button id="lang-btn">EN</button>
+    <span id="page-buttons">
+      <button data-page="0">1</button>
+      <button data-page="1">2</button>
+    </span>
+  </div>
+</div>
+
+<div id="header">
+  <h1>ELITE DEALS</h1>
+  <p>TURN YOUR IDEAS INTO DEALS</p>
+  <div class="icons">
+    <a href="https://www.instagram.com/anas__.elk?igsh=MjF3dWpsM2xlZHdh" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" width="40" alt="Instagram">
+    </a>
+    <a href="#"><img src="https://img.icons8.com/ios-filled/50/000000/qr-code.png" width="40" alt="QR"></a>
+  </div>
+</div>
+
+<div class="scroll-bar">
+  <span>ما نقدموه ليس مجرد تصميم… بل قيمة حقيقية تزيد من قوة مشروعك.</span>
+</div>
+
+<div class="scroll-bar">
+  <span>لرغبتك في أي خدمة أخرى، المرجو مراسلتنا عبر الخاص.</span>
+</div>
+
+<div id="pages">
+  <div class="page" id="page1">
+    <h2>MES SERVICE</h2>
+    <ul>
+      <li>Logo designs — $2</li>
+      <li>Instagram followers — from $1.5</li>
+      <li>TikTok followers — from $2</li>
+      <li>ChatGPT access — from $5</li>
+      <li>Netflix — from $6</li>
+      <li>Canva Pro lifetime — $2</li>
+      <li>…and more services</li>
+    </ul>
+  </div>
+
+  <div class="page" id="page2">
+    <h2>Offers</h2>
+    <p>أقدم لك طريقاً جاهزاً لبداية مشروع ناجح، مع خطة دقيقة ومجرّبة تضمن ليك أفضل انطلاقة بدون ضياع الوقت أو الجهد.</p>
+
+    <div id="tips">
+      <h2>Tips & Advice</h2>
+      <ul>
+        <li>Always double-check your orders before requesting services.</li>
+        <li>Follow instructions for each platform to get the best results.</li>
+        <li>Stay safe: only share minimal personal info when ordering online.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateDateTime() {
+    const dt = new Date();
+    const formatted = dt.toLocaleString();
+    document.getElementById('datetime').textContent = formatted;
+  }
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
+
+  const modeBtn = document.getElementById('mode-btn');
+  modeBtn.addEventListener('click', ()=>{
+    document.body.classList.toggle('dark');
+    document.body.classList.toggle('light');
+    modeBtn.textContent = document.body.classList.contains('dark') ? '🌙' : '☀';
+  });
+
+  const langBtn = document.getElementById('lang-btn');
+  let lang = 'EN';
+  langBtn.addEventListener('click', ()=>{
+    lang = lang==='EN'?'AR':'EN';
+    langBtn.textContent = lang;
+  });
+
+  const pages = document.getElementById('pages');
+  document.querySelectorAll('#page-buttons button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const pageIndex = btn.getAttribute('data-page');
+      pages.style.transform = translateX(-${pageIndex*100}vw);
+    });
+  });
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(()=>console.log('Service Worker Registered'));
+  }
+</script>
+
+</body>
+</html>v
